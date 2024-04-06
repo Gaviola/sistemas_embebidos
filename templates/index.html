@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Arduino</title>
+</head>
+<body>
+    <h1>Control de Arduino</h1>
+
+    <h2>Control de brillo de LEDs</h2>
+    <form action="/control_led" method="post">
+        <label for="brightness9">Brillo LED 9:</label>
+        <input type="range" id="brightness9" name="brightness9" min="0" max="255">
+        <br>
+        <label for="brightness10">Brillo LED 10:</label>
+        <input type="range" id="brightness10" name="brightness10" min="0" max="255">
+        <br>
+        <label for="brightness11">Brillo LED 11:</label>
+        <input type="range" id="brightness11" name="brightness11" min="0" max="255">
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <h2>Encender/Apagar LED 13</h2>
+    <form action="/toggle_led" method="post">
+        <input type="radio" id="on" name="action" value="on">
+        <label for="on">Encender</label>
+        <br>
+        <input type="radio" id="off" name="action" value="off">
+        <label for="off">Apagar</label>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <h2>Intensidad luminosa del LDR</h2>
+    <p>{{ ldr_intensity }}</p>
+</body>
+</html>
