@@ -45,7 +45,7 @@ def ldr_intensity():
     arduino.write('bv'.encode())
     bright_intensity = arduino.readline().decode().strip()
 
-    return render_template('index.html', ldr_intensity=bright_intensity)
+    return bright_intensity
 
 
 if __name__ == '__main__':
