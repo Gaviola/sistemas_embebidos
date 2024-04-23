@@ -24,9 +24,11 @@ void loop() {
     set_bright(ins);  // EJ cambio de brillo de led9 a 200: br_9_200
   }
   else if (instruction == "bv") {
-    int ldrValue = analogRead(ldrPin); // Leer el valor analógico del LDR
+    int vOut = analogRead(ldrPin); // Leer el valor analógico del LDR
+    float rLDR = ((10*(10^3)*5)/ vOut) - 10*(10^3);
+    float intensidad = (1*(10^6))/rLDR;
     Serial.print("Intensidad luminosa captada por el LDR: ");
-    Serial.println(ldrValue); // Mostrar el valor por el puerto serial
+    Serial.println(intensidad); // Mostrar el valor por el puerto serial
   }
   else {
     turn_on_off_led(ins);

@@ -41,11 +41,11 @@ def toggle_led():
 
 # Ruta para mostrar la intensidad luminosa del LDR
 @app.route('/ldr_intensity')
-def ldr_intensity():
+def get_ldr_intensity():
     arduino.write('bv'.encode())
-    bright_intensity = arduino.readline().decode().strip()
+    ldr_intensity = arduino.readline().decode().strip()
 
-    return bright_intensity
+    return ldr_intensity
 
 
 if __name__ == '__main__':
