@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteccion de Intensidad</title>
+</head>
+<body>
+    <h1>Deteccion de Intensidad</h1>
+    <p>Estado de la lectura: <span id="reading_status"></span></p>
+    <p>Última lectura: <span id="last_reading"></span></p>
+    <button onclick="toggleReading()">Iniciar/Detener Lectura</button>
+
+    <script>
+        function toggleReading() {
+            fetch('/toggle_reading')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('reading_status').innerText = data;
+            });
+        }
+
+        function updateReading() {
+            fetch('/get_reading')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('last_reading').innerText = data.reading;
+            });
+        }
+
+        setInterval(updateReading, 1000);
+    </script>
+</body>
+</html>

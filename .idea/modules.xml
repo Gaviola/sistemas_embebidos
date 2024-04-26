@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/TP1_embebidas.iml" filepath="$PROJECT_DIR$/.idea/TP1_embebidas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Sistemas_Embebidos.iml" filepath="$PROJECT_DIR$/.idea/Sistemas_Embebidos.iml" />
     </modules>
   </component>
 </project>
