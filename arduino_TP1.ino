@@ -13,6 +13,8 @@ void setup() {
   pinMode(ldrPin, INPUT);
 }
 
+
+
 void loop() {
   String instruction;
   if (Serial.available() > 0) {
@@ -37,18 +39,20 @@ void loop() {
 void set_bright(String ins) {
   String led = ins.substring(0, ins.indexOf('_'));
   String intensity = ins.substring(ins.indexOf('_') + 1);
+  
   if (led == "9") {
-    int ins = Serial.parseInt(); // Leemos el valor de brillo enviado
+    int ins = intensity.toInt(); // Leemos el valor de brillo enviado
+    Serial.println(ins);
     analogWrite(led9, ins); // Establecemos el brillo del LED
     Serial.println(intensity);
   }
   else if (led == "10") {
-    int ins = Serial.parseInt();
+    int ins = intensity.toInt();
     analogWrite(led10, ins); 
     Serial.println(intensity);
   }
   else if (led == "11") {
-    int ins = Serial.parseInt();
+    int ins = intensity.toInt();
     analogWrite(led11, ins); 
     Serial.println(intensity);
   }
