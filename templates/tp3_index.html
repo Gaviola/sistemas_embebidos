@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Arduino Clock</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Arduino Clock</h1>
+    <p id="clock"></p>
+    <button id="refresh">Refresh</button>
+    <br>
+    <input type="text" id="new_time" placeholder="YY:MM:DD:HH:MM:SS">
+    <button id="set">Set Time</button>
+    <br>
+    <button id="store">Store Time</button>
+    <button id="read">Read Stored Times</button>
+    <button id="clear">Clear Stored Times</button>
+    <ul id="stored_times"></ul>
+
+    <script>
+        function refreshClock() {
+            $.get('/read_time', function(data) {
+                $('#clock').text(data);
+            });
+        }
+
+        $('#refresh').click(refreshClock);
+
+        $('#set').click(function() {
+            var newTime = $('#new_time').val();
+            $.post('/set_time', {new_time: newTime}, refreshClock);
+        });
+
+        $('#store').click(function() {
+            $.post('/store_time', refreshClock);
+        });
+
+        $('#read').click(function() {
+            $.get('/read_stored_times', function(data) {
+                $('#stored_times').empty();
+                for (var i = 0; i < data.length; i++) {
+                    $('#stored_times').append('<li>' + data[i] + '</li>');
+                }
+            });
+        });
+
+        $('#clear').click(function() {
+            $.post('/clear_times', function() {
+                $('#stored_times').empty();
+            });
+        });
+
+        refreshClock();
+    </script>
+</body>
+</html>
