@@ -4,7 +4,7 @@ import threading
 import time
 
 app = Flask(__name__)
-arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, bytesize=serial.EIGHTBITS,
+arduino = serial.Serial(port='/dev/ttyACM1', baudrate=9600, bytesize=serial.EIGHTBITS,
                         parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=1,
                         xonxoff=False, rtscts=False, write_timeout=10, dsrdtr=False,
                         inter_byte_timeout=None, exclusive=None)
@@ -32,12 +32,15 @@ def toggle_reading():
     global reading, reading_thread
     reading = not reading
     if reading:
+        arduino.write('b'.encode())  # El comando b inicia/termina las lectura
         reading_thread = threading.Thread(target=read_from_arduino)
         reading_thread.start()
+        return 'Lectura Iniciada'
     else:
         if reading_thread is not None:
+            arduino.write('b'.encode())
             reading_thread.join()
-    return 'Lectura iniciada' if reading else 'Lectura detenida'
+            return 'Lectura Detenida'
 
 
 @app.route('/get_reading')
