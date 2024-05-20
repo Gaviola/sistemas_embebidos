@@ -10,7 +10,7 @@ ser = serial.Serial(port='/dev/ttyACM1', baudrate=9600, bytesize=serial.EIGHTBIT
                         inter_byte_timeout=None, exclusive=None)
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('tp3_index.html')
 
 @app.route('/read_time', methods=['GET'])
 def read_time():
