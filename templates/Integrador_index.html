@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detector de distancia</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        .distance {
+            font-size: 72px;
+            color: #007bff;
+        }
+        .alert {
+            font-size: 24px;
+            color: red;
+        }
+    </style>
+    <script>
+        function fetchDistance() {
+            fetch('/distance')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('distance').innerText = data.distance + " cm";
+                    if (data.alert) {
+                        document.getElementById('alert').innerText = "ALARM: Object too close!";
+                        document.getElementById('alert').style.color = "red";
+                    } else {
+                        document.getElementById('alert').innerText = "";
+                    }
+                });
+        }
+
+        setInterval(fetchDistance, 1000);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Distancia Detectada</h1>
+        <p class="distance" id="distance">Loading...</p>
+        <p class="alert" id="alert"></p>
+    </div>
+</body>
+</html>
